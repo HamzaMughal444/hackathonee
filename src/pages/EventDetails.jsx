@@ -104,7 +104,14 @@ const EventDetails = () => {
     }
   };
 
-  if (!event) return <div className="loading">Loading...</div>;
+  if (!event) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading event details...</p>
+      </div>
+    );
+  }
 
   const isExpired = new Date(event.date) < new Date();
   const isSoldOut = event.availableTickets <= 0;

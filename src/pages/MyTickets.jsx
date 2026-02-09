@@ -96,7 +96,14 @@ const MyTickets = () => {
     upcoming: tickets.filter(t => new Date(t.eventDate) > new Date()).length
   };
 
-  if (loading) return <div className="loading">Loading tickets...</div>;
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading your tickets...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="my-tickets-container">

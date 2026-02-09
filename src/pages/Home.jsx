@@ -9,16 +9,25 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [stats, setStats] = useState({ total: 0, available: 0, upcoming: 0 });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Load events from localStorage or use initial data
-    const storedEvents = localStorage.getItem('events');
-    if (storedEvents) {
-      setEvents(JSON.parse(storedEvents));
-    } else {
-      setEvents(initialEvents);
-      localStorage.setItem('events', JSON.stringify(initialEvents));
-    }
+    const loadEvents = async () => {
+      setLoading(true);
+      // Simulate loading delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const storedEvents = localStorage.getItem('events');
+      if (storedEvents) {
+        setEvents(JSON.parse(storedEvents));
+      } else {
+        setEvents(initialEvents);
+        localStorage.setItem('events', JSON.stringify(initialEvents));
+      }
+      setLoading(false);
+    };
+    loadEvents();
   }, []);
 
   useEffect(() => {
@@ -57,6 +66,15 @@ const Home = () => {
     setSelectedCategory('all');
     setSortBy('date');
   };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Loading events...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">
