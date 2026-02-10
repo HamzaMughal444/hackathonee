@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Ticket, LogOut, User, LayoutDashboard, Menu, X } from 'lucide-react';
+import { Calendar, LogOut, User, LayoutDashboard, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -24,8 +24,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={closeMenu}>
-          <Ticket size={28} />
-          <span>EventHub</span>
+          <Calendar size={28} />
+          <span>EventFlow</span>
         </Link>
         
         <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -38,19 +38,19 @@ const Navbar = () => {
               <Link to="/" className="nav-link" onClick={closeMenu}>Events</Link>
               {userRole === 'attendee' && (
                 <Link to="/my-tickets" className="nav-link" onClick={closeMenu}>
-                  <Ticket size={18} />
-                  My Tickets
+                  <Calendar size={18} />
+                  Tickets
                 </Link>
               )}
               {userRole === 'organizer' && (
                 <Link to="/organizer" className="nav-link" onClick={closeMenu}>
                   <LayoutDashboard size={18} />
-                  Dashboard
+                  Manage
                 </Link>
               )}
               <div className="nav-user">
                 <User size={18} />
-                <span>{currentUser.email}</span>
+                <span className="user-badge">{userRole === 'attendee' ? 'Attendee' : 'Organizer'}</span>
               </div>
               <button onClick={handleLogout} className="btn-logout">
                 <LogOut size={18} />

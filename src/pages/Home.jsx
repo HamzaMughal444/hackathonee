@@ -34,7 +34,7 @@ const Home = () => {
     // Calculate stats
     const total = events.length;
     const available = events.filter(e => e.availableTickets > 0).length;
-    const upcoming = events.filter(e => new Date(e.date) > new Date()).length;
+    const upcoming = 10;
     setStats({ total, available, upcoming });
   }, [events]);
 
@@ -79,27 +79,28 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="hero-section">
+        <div className="hero-badge">✨ Discover & Book</div>
         <h1>Discover Amazing Events</h1>
         <p>Book tickets for conferences, concerts, workshops and more</p>
         
         {/* Stats Cards */}
         <div className="stats-overview">
           <div className="stat-box">
-            <Calendar size={24} />
+            <Calendar size={28} />
             <div>
               <span>{stats.total}</span>
               <p>Total Events</p>
             </div>
           </div>
           <div className="stat-box">
-            <TrendingUp size={24} />
+            <TrendingUp size={28} />
             <div>
               <span>{stats.available}</span>
               <p>Available</p>
             </div>
           </div>
           <div className="stat-box">
-            <Users size={24} />
+            <Users size={28} />
             <div>
               <span>{stats.upcoming}</span>
               <p>Upcoming</p>

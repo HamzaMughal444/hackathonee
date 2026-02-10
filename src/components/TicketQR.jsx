@@ -68,7 +68,7 @@ const TicketQR = ({ ticket }) => {
             userId: ticket.userId,
             bookedAt: ticket.bookedAt
           })}
-          size={200}
+          size={180}
           level="H"
           includeMargin={true}
         />
