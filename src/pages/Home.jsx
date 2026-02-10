@@ -19,11 +19,16 @@ const Home = () => {
       await new Promise(resolve => setTimeout(resolve, 500));
       
       const storedEvents = localStorage.getItem('events');
-      if (storedEvents) {
-        setEvents(JSON.parse(storedEvents));
-      } else {
+      const eventsVersion = localStorage.getItem('eventsVersion');
+      const currentVersion = '2.0'; // Update this when events change
+      
+      // Force update if version changed or no stored events
+      if (!storedEvents || eventsVersion !== currentVersion) {
         setEvents(initialEvents);
         localStorage.setItem('events', JSON.stringify(initialEvents));
+        localStorage.setItem('eventsVersion', currentVersion);
+      } else {
+        setEvents(JSON.parse(storedEvents));
       }
       setLoading(false);
     };
